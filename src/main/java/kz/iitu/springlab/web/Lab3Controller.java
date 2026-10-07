@@ -14,7 +14,6 @@ import java.util.Map;
 @RequestMapping("/api/lab3")
 public class Lab3Controller {
 
-
     private final AppProperties props;
     private final EnvironmentBanner banner;
     private final Environment environment;
@@ -32,16 +31,18 @@ public class Lab3Controller {
         return Map.ofEntries(
                 Map.entry("owner", props.owner()),
                 Map.entry("group", props.group()),
+
                 Map.entry("mailFrom", props.mail().from()),
                 Map.entry("mailRetryCount", props.mail().retryCount()),
                 Map.entry("mailTimeout", props.mail().timeout().toString()),
                 Map.entry("mailEnabled", props.mail().enabled()),
+
+                Map.entry("uiTheme", props.ui().theme()),
+                Map.entry("uiItemsPerPage", props.ui().itemsPerPage()),
+
                 Map.entry("serverPort", environment.getProperty("server.port")),
-                Map.entry("activeProfiles",
-                        Arrays.asList(environment.getActiveProfiles())),
+                Map.entry("activeProfiles", Arrays.asList(environment.getActiveProfiles())),
                 Map.entry("banner", banner.describe())
         );
     }
-
-
 }
